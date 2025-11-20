@@ -95,6 +95,3 @@ Contributions are welcome. Open an issue or submit a pull request for fixes, imp
 
 For business inquiries, consulting, or mentorship requests, use the contact form on the live portfolio site or open an issue on this repository.
 
----
-
-This README was updated to reflect the portfolio and AI agent integration. For implementation details, see `supabase/functions/chat/index.ts`.
