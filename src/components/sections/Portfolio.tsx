@@ -1,5 +1,6 @@
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 
 const Portfolio = () => {
@@ -40,7 +41,7 @@ const Portfolio = () => {
 
 
   return (
-    <section id="portfolio" className="min-h-screen flex items-center py-20 px-6">
+    <section id="portfolio" className="min-h-screen flex items-center py-20 px-6 relative z-10">
       <div className="max-w-6xl mx-auto w-full">
         <h2 className="text-4xl md:text-5xl font-serif font-black mb-2 uppercase border-b-4 border-primary inline-block">Portfolio</h2>
         <p className="text-xs uppercase tracking-widest text-muted-foreground mb-12">Featured Work</p>
@@ -81,22 +82,36 @@ const Portfolio = () => {
                     variant="outline"
                     size="sm"
                     className="border-2 border-foreground hover:bg-foreground hover:text-background flex-1 text-xs uppercase tracking-wider"
-                    asChild>
-                    <a href={project.link} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="w-3 h-3 mr-2" />
-                      View
-                    </a>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="border-2 border-foreground hover:bg-foreground hover:text-background"
-                    asChild
+                    onClick={() => project.link && window.open(project.link, "_blank", "noopener,noreferrer")}
                   >
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="w-3 h-3" />
-                    </a>
+                    <ExternalLink className="w-3 h-3 mr-2" />
+                    View
                   </Button>
+
+                  {project.github && project.github !== "#" && project.github.trim() !== "" ? (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-2 border-foreground hover:bg-foreground hover:text-background"
+                      onClick={() => window.open(project.github, "_blank", "noopener,noreferrer")}
+                    >
+                      <Github className="w-3 h-3" />
+                    </Button>
+                  ) : (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="border-2 border-foreground opacity-70 cursor-not-allowed"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <Github className="w-3 h-3" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">Private repository</TooltipContent>
+                    </Tooltip>
+                  )}
                 </div>
               </div>
             </div>
