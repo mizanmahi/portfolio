@@ -3,7 +3,7 @@
 Full-Stack Web Developer
 
 Education
-- BSc in Computer Science & Engineering — Fareast International University
+- BSc in Computer Science & Engineering - Fareast International University
 
 Experience
 - 4+ years in web development
