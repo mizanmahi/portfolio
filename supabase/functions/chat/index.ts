@@ -13,10 +13,10 @@ serve(async (req) => {
 
   try {
     const { messages } = await req.json();
-    const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
+    const OPENROUTER_API_KEY = Deno.env.get('OPENROUTER_API_KEY');
 
-    if (!LOVABLE_API_KEY) {
-      throw new Error('LOVABLE_API_KEY not configured');
+    if (!OPENROUTER_API_KEY) {
+      throw new Error('OPENROUTER_API_KEY not configured');
     }
 
     const systemPrompt = `You are an AI assistant representing Mizanur Rahman, a full-stack web developer. Here's what you should know about him:
@@ -57,16 +57,18 @@ When responding to queries:
 - If asked about availability for work, mention interest in consulting and full-stack projects
 - Keep responses concise and terminal-style when appropriate`;
 
-    console.log('Calling Lovable AI with messages:', messages.length);
+    console.log('Calling OpenRouter AI with messages:', messages.length);
 
-    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://mizanur-rahman.lovable.app',
+        'X-Title': 'Mizanur Rahman Portfolio',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
+        model: 'anthropic/claude-3.5-sonnet',
         messages: [
           { role: 'system', content: systemPrompt },
           ...messages
@@ -82,18 +84,18 @@ When responding to queries:
         });
       }
       if (response.status === 402) {
-        return new Response(JSON.stringify({ error: 'AI usage limit reached. Please contact the site owner.' }), {
+        return new Response(JSON.stringify({ response }), {
           status: 402,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
       const errorText = await response.text();
-      console.error('Lovable AI error:', response.status, errorText);
-      throw new Error(`Lovable AI error: ${response.status}`);
+      console.error('OpenRouter AI error:', response.status, errorText);
+      throw new Error(`OpenRouter AI error: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log('Lovable AI response received');
+    console.log('OpenRouter AI response received');
 
     const assistantMessage = data.choices[0].message.content;
 

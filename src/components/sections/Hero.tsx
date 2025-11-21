@@ -6,6 +6,8 @@ interface HeroProps {
   onOpenChat: () => void;
 }
 
+
+
 const Hero = ({ onNavigate, onOpenChat }: HeroProps) => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
@@ -47,7 +49,7 @@ const Hero = ({ onNavigate, onOpenChat }: HeroProps) => {
 
         {/* Tech stack tags */}
         <div className="flex flex-wrap justify-center gap-2">
-          {["React", "Node.js", "TypeScript", "PostgreSQL", "Docker", "AI/ML"].map((tech) => (
+          {["GOLANG", "Node.js", "TypeScript", "REACT", "NEXTJS", "PostgreSQL", "Docker", "AI AGENTS"].map((tech) => (
             <span
               key={tech}
               className="px-3 py-1 bg-background border border-foreground/30 text-xs uppercase tracking-wider hover:bg-primary hover:text-background hover:border-primary transition-all cursor-default"

@@ -4,16 +4,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // EmailJS configuration - Replace these with your actual EmailJS credentials
+  const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+  const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+  const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -26,13 +33,38 @@ const Contact = () => {
       return;
     }
 
-    // Simulate form submission
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
+    setIsSubmitting(true);
 
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      // Send email using EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: 'mizanmahi24@gmail.com',
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -43,7 +75,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen flex items-center py-20 px-6">
+    <section id="contact" className="min-h-screen flex items-center py-20 px-6 relative z-10">
       <div className="max-w-4xl mx-auto w-full">
         <h2 className="text-4xl md:text-5xl font-serif font-black mb-2 uppercase border-b-4 border-primary inline-block">Contact</h2>
         <p className="text-sm text-muted-foreground mb-12 border-l-2 border-primary pl-4 mt-6">
@@ -61,10 +93,10 @@ const Contact = () => {
                 <div>
                   <h3 className="font-bold mb-1 text-xs uppercase tracking-wide">Email</h3>
                   <a
-                    href="mailto:mizan@example.com"
+                    href="mailto:mizanmahi24@gmail.com"
                     className="text-xs text-muted-foreground hover:text-primary transition-colors"
                   >
-                    mizan@example.com
+                    mizanmahi24@gmail.com
                   </a>
                 </div>
               </div>
@@ -126,9 +158,10 @@ const Contact = () => {
             <Button
               type="submit"
               size="lg"
-              className="w-full bg-primary hover:bg-primary/90 text-background font-bold uppercase tracking-wider text-xs transition-all"
+              disabled={isSubmitting}
+              className="w-full bg-primary hover:bg-primary/90 text-background font-bold uppercase tracking-wider text-xs transition-all disabled:opacity-50"
             >
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
               <Send className="ml-2 w-4 h-4" />
             </Button>
           </form>

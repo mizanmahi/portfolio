@@ -1,25 +1,43 @@
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+
 const Portfolio = () => {
   const projects = [
-    {
-      title: "Solruf",
-      description: "A comprehensive solar marketplace platform connecting buyers and sellers in the renewable energy sector.",
-      tech: ["React", "Node.js", "PostgreSQL", "AWS"],
-      gradient: "from-primary/20 to-secondary/20",
-      link: "#",
-      github: "#",
-    },
-    {
-      title: "Lyceum",
-      description: "An AI-powered learning platform that personalizes education with intelligent course recommendations.",
-      tech: ["Next.js", "OpenAI", "Prisma", "TypeScript"],
-      gradient: "from-secondary/20 to-neon-pink/20",
-      link: "#",
-      github: "#",
-    },
-  ];
+  {
+    title: "Edulavo",
+    description:
+      "AI-powered course builder that turns a simple prompt into a complete learning path with modules, lessons, and quizzes.",
+    tech: ["Python","GRPC","Next.js", "AGNO", "OPENROUTER", "MongoDB", "TRPC"],
+    gradient: "from-secondary/20 to-neon-pink/20",
+    link: "https://www.edulavo.com/",
+    github: "#",
+    thumbnail: "https://i.ibb.co.com/JwCrHwXH/product-demo-new.webp",
+  },
+
+  {
+    title: "Programming Hero",
+    description:
+      "A gamified coding platform that teaches web development and programming fundamentals through fun, career-focused lessons.",
+    tech: ["Web Development", "MERN", "Python", "Algorithms", "Data Structures"],
+    gradient: "from-indigo-300 to-blue-500",
+    link: "https://www.programming-hero.com/",
+    github: "#",
+    thumbnail: "https://i.ibb.co.com/5W40ZDWt/image.png",
+  },
+
+  {
+    title: "Solruf",
+    description:
+      "A solar marketplace that connects buyers and sellers with tools for discovery, procurement, and project management.",
+    tech: ["React", "Node.js", "PostgreSQL", "AWS"],
+    gradient: "from-primary/20 to-secondary/20",
+    link: "https://www.solruf.com/",
+    github: "#",
+    thumbnail: "https://i.ibb.co.com/qLY3FM27/solruf.jpg",
+  }
+];
+
 
   return (
     <section id="portfolio" className="min-h-screen flex items-center py-20 px-6">
@@ -35,9 +53,9 @@ const Portfolio = () => {
               style={{ animationDelay: `${idx * 100}ms` }}
             >
               {/* Project image placeholder */}
-              <div className="h-48 bg-card border-b-2 border-foreground/20 flex items-center justify-center relative overflow-hidden retro-dots">
+              <div className="h-[300px] bg-card border-b-2 border-foreground/20 flex items-center justify-center relative overflow-hidden retro-dots">
                 <div className="text-6xl font-serif font-black text-foreground/10">
-                  {project.title.charAt(0)}
+                  <img src={project.thumbnail} alt={project.title} />
                 </div>
               </div>
 

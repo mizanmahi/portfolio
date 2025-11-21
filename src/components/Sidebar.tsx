@@ -21,10 +21,12 @@ const Sidebar = ({ activeSection, onNavigate, onOpenChat }: SidebarProps) => {
     { id: "contact", label: "Contact" },
   ];
 
+
+ // add hover text colors for social links
   const socialLinks = [
-    { icon: Github, href: "https://github.com/mizanurrahman", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/mizanurrahman", label: "LinkedIn" },
-    { icon: Mail, href: "mailto:mizan@example.com", label: "Email" },
+    { icon: Github, href: "https://github.com/mizanmahi", label: "GitHub", hoverBgColor: "hover:bg-gray-400", hoverTextColor: "hover:text-black" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/mizan-mahi", label: "LinkedIn", hoverBgColor: "hover:bg-blue-600", hoverTextColor: "hover:text-white" },
+    { icon: Mail, href: "mailto:mizanmahi24@gmail.com", label: "Email", hoverBgColor: "hover:bg-red-600", hoverTextColor: "hover:text-white" },
   ];
 
   const handleNavigate = (sectionId: string) => {
@@ -56,11 +58,11 @@ const Sidebar = ({ activeSection, onNavigate, onOpenChat }: SidebarProps) => {
         <div className="p-8 flex flex-col h-full">
           {/* Profile Section */}
           <div className="mb-8">
-            <div className="relative w-32 h-32 mx-auto mb-6 group border-2 border-foreground/20">
+            <div className="relative w-32 h-32 mx-auto mb-6 group border-2 border-foreground/20 cursor-pointer" >
               <img
-                src={profileImage}
+                src="https://i.ibb.co.com/ccSwxH54/1762522626073.png"
                 alt="Mizanur Rahman"
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all "
               />
               <div className="absolute inset-0 border border-primary opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
@@ -82,7 +84,7 @@ const Sidebar = ({ activeSection, onNavigate, onOpenChat }: SidebarProps) => {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-card border border-foreground/20 hover:bg-primary hover:text-background transition-all"
+                className={`p-2 bg-card border border-foreground/20 hover:bg-primary hover:text-background transition-all ${social.hoverBgColor} ${social.hoverTextColor}`}
                 aria-label={social.label}
               >
                 <social.icon className="w-4 h-4" />

@@ -17,7 +17,7 @@ const Experience = () => {
     {
       title: "Lead React Developer",
       company: "SOLRUF",
-      period: "Mar 2022 - Jun 2022",
+      period: "Mar 2022 - Jun 2023",
       description: "Led frontend development for solar marketplace platform, implementing scalable architecture.",
       color: "from-neon-pink to-neon-pink/60",
     },

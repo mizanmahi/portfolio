@@ -3,12 +3,12 @@ const Skills = () => {
   const skillCategories = [
     {
       category: "Frontend",
-      skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS"],
+      skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Redux", "Vue.js", "shadcn/ui", "material-ui"],
       color: "from-primary to-primary/60",
     },
     {
       category: "Backend",
-      skills: ["Node.js", "Express", "Prisma", "PostgreSQL", "Redis", "REST APIs"],
+      skills: ["Node.js", "Python", "GO", "Express", "GRPC", "TRPC", "Prisma", "PostgreSQL", "MongoDB", "Redis", "REST APIs"],
       color: "from-secondary to-secondary/60",
     },
     {
@@ -18,7 +18,7 @@ const Skills = () => {
     },
     {
       category: "Other",
-      skills: ["Python", "AI Agents", "Prompt Engineering", "System Design", "Mentorship"],
+      skills: ["Agentic AI", "System Design", "Mentorship"],
       color: "from-primary to-secondary",
     },
   ];
